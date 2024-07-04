@@ -1,7 +1,15 @@
-import Directory from "./components/directory/directory.component.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./routes/home/home.component";
 
 function App() {
-  return <Directory />;
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
