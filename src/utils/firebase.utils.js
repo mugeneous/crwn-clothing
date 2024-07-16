@@ -2,8 +2,9 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
-  signInWithRedirect,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -36,7 +37,10 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 const db = getFirestore();
 
 // this function create a user document in a firestore database if it doesnt exist
-export const createUserDocFromAuth = async ({ uid }) => {
+export const createUserDocFromAuth = async (
+  uid,
+  additionalInformation = {}
+) => {
   // Gets a DocumentReference instance that refers to the document at the specified absolute path.
   const userDocRef = doc(db, "users", uid);
 
@@ -53,6 +57,7 @@ export const createUserDocFromAuth = async ({ uid }) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log(error.message);
@@ -60,4 +65,19 @@ export const createUserDocFromAuth = async ({ uid }) => {
   }
 
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) {
+    alert("mohon isi semua");
+    return;
+  }
+
+  return await signInWithEmailAndPassword(auth, email, password);
 };
