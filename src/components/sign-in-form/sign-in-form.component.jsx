@@ -37,8 +37,15 @@ const SignInForm = () => {
       const response = await signInUserWithEmailAndPassword(email, password);
       console.log(response);
     } catch (error) {
-      console.log(error.code);
-      console.log(error.message);
+      switch (error.code) {
+        // case "auth/invalid-credential":
+        //   alert("Email atau kata sandi salah");
+        //   break;
+        // case
+        default:
+          console.log(error.code);
+          break;
+      }
     }
   };
 

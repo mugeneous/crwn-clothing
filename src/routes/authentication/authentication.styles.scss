@@ -1,10 +1,6 @@
-.sign-in-container {
+.authentication-container {
   display: flex;
-  flex-direction: column;
-  width: 380px;
-
-  .button-sign-in-container {
-    display: flex;
-    justify-content: space-between;
-  }
+  justify-content: space-between;
+  width: 900px;
+  margin: 30px auto;
 }
