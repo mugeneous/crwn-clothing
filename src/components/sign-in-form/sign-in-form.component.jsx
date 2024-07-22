@@ -1,13 +1,13 @@
+import { useState, useContext } from "react";
 import {
   signInWithGooglePopup,
-  createUserDocFromAuth,
   signInUserWithEmailAndPassword,
 } from "../../utils/firebase.utils";
+import { UserContext } from "../contexts/user.context";
 
-import SignUpForm from "../sign-up-form/sign-up-form.component";
 import FormInput from "../form-input/form-input.component";
-import { useState } from "react";
 import Button from "../button/button.component";
+
 import "./sign-in-form.styles.scss";
 
 const defaultFormFields = {
@@ -21,8 +21,7 @@ const SignInForm = () => {
 
   const handleSignInWithGoogle = async (event) => {
     event.preventDefault();
-    const response = await signInWithGooglePopup();
-    const userDocRef = await createUserDocFromAuth(response.user);
+    await signInWithGooglePopup();
   };
 
   const handleFormChange = (event) => {
@@ -35,13 +34,12 @@ const SignInForm = () => {
 
     try {
       const response = await signInUserWithEmailAndPassword(email, password);
-      console.log(response);
     } catch (error) {
       switch (error.code) {
-        // case "auth/invalid-credential":
-        //   alert("Email atau kata sandi salah");
-        //   break;
-        // case
+        case "auth/invalid-credential":
+          alert("Email atau kata sandi salah");
+          break;
+
         default:
           console.log(error.code);
           break;
