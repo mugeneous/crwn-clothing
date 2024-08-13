@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const CategoryItem = ({ category: { id, title, imageUrl } }) => {
   return (
-    <div className="category-container" key={id}>
+    <div className="category-item-container" key={id}>
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
