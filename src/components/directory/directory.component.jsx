@@ -1,7 +1,5 @@
 import CategoryItem from "../category-item/category-item.component.jsx";
 
-import "./directory.style.scss";
-
 const Directory = () => {
   const categories = [
     {
@@ -32,7 +30,7 @@ const Directory = () => {
   ];
 
   return (
-    <div className="categories-container">
+    <div className="w-full flex flex-wrap justify-between">
       {categories.map((category) => (
         <CategoryItem key={category.id} category={category} />
       ))}

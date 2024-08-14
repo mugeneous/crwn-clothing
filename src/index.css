@@ -1,14 +1,36 @@
-:root {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Open Sans Condensed", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+  ,
+  body {
+    margin: 0;
+  }
+  ,
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+/* :root {
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
-body {
+/* body {
   margin: 0;
   padding: 20px 40px;
-}
-
+} */
+/* 
 a {
   text-decoration: none;
   color: black;
@@ -16,4 +38,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
+} */
