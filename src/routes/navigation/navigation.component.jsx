@@ -8,7 +8,6 @@ import { UserContext } from "../../components/contexts/user.context";
 import { CartContext } from "../../components/contexts/cart.context";
 import { signOutUser } from "../../utils/firebase.utils";
 
-import "./navigation.style.scss";
 import CrownLogo from "../../assets/crown.svg";
 
 const Navigation = () => {
@@ -17,22 +16,20 @@ const Navigation = () => {
 
   return (
     <>
-      <div className="navigation">
-        <div className="logo-container">
-          <Link className="logo-container" to="/">
-            <CrownLogo className="logo" />
-          </Link>
-        </div>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
+      <div className="h-20 w-full flex justify-between mb-6">
+        <Link className="flex items-center justify-center pl-7" to="/">
+          <CrownLogo className="logo" />
+        </Link>
+        <div className=" w-1/2 flex items-center justify-end">
+          <Link className="px-4" to="/shop">
             SHOP
           </Link>
           {currentUser ? (
-            <span className="nav-link" onClick={signOutUser}>
+            <span className="px-4" onClick={signOutUser}>
               SIGN OUT
             </span>
           ) : (
-            <Link className="nav-link" to="/auth">
+            <Link className="px-4" to="/auth">
               SIGN IN
             </Link>
           )}
