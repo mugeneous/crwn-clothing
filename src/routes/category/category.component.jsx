@@ -16,11 +16,16 @@ const Category = () => {
   }, [category, categoriesMap]);
 
   return (
-    <div className="category-container">
-      {products &&
-        products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    <div className="flex flex-col">
+      <h2 className="mb-10 text-4xl font-semibold text-center">
+        {category.toUpperCase()}
+      </h2>
+      <div className="category-container">
+        {products &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+      </div>
     </div>
   );
 };
