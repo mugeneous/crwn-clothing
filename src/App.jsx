@@ -1,4 +1,13 @@
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import {
+  onAuthStateChangedListener,
+  createUserDocFromAuth,
+} from "./utils/firebase.utils";
+
+import { setCurrentUser } from "./store/user/user.action";
 
 import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
@@ -9,6 +18,19 @@ import CategoriesPreview from "./routes/categories-preview/categories-preview.co
 import Category from "./routes/category/category.component";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        createUserDocFromAuth(user.uid);
+      }
+      dispatch(setCurrentUser(user));
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
+
   const router = createBrowserRouter([
     {
       path: "/",
