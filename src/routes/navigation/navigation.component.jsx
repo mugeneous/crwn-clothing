@@ -1,26 +1,28 @@
 import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 
-import CartIcon from "../../components/cart-icon/cart-icon.component";
-import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-
-import { UserContext } from "../../components/contexts/user.context";
 import { CartContext } from "../../components/contexts/cart.context";
 import { signOutUser } from "../../utils/firebase.utils";
 
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+
+import { selectCurrentUser } from "../../store/user/user.selector";
+
 import CrownLogo from "../../assets/crown.svg";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
-      <div className="h-20 w-full flex justify-between mb-6">
+      <div className="flex justify-between w-full h-20 mb-6">
         <Link className="flex items-center justify-center pl-7" to="/">
           <CrownLogo className="logo" />
         </Link>
-        <div className=" w-1/2 flex items-center justify-end">
+        <div className="flex items-center justify-end w-1/2 ">
           <Link className="px-4" to="/shop">
             SHOP
           </Link>
