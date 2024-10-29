@@ -94,7 +94,6 @@ const CART_ACTION_TYPES = {
 
 const cartReducer = (state, action) => {
   const { type, payload } = action;
-  console.log(payload);
 
   switch (type) {
     case CART_ACTION_TYPES.SET_CART_ITEMS:
@@ -115,8 +114,6 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [{ isCartOpen, cartItems, cartTotalQuantity, totalPrice }, dispatch] =
     useReducer(cartReducer, INITIAL_STATE);
-
-  console.log(cartItems);
 
   const updateCartItemsReducer = (newCartItems) => {
     const newCartTotalQuantity = newCartItems.reduce(

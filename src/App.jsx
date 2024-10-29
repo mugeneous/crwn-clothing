@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import {
@@ -29,7 +29,7 @@ function App() {
     });
 
     return unsubscribe;
-  }, [dispatch]);
+  }, []);
 
   const router = createBrowserRouter([
     {
@@ -42,12 +42,7 @@ function App() {
         },
         {
           path: "shop",
-          element: (
-            <>
-              <Shop />
-              <Outlet />
-            </>
-          ),
+          element: <Shop />,
           children: [
             {
               index: true,
