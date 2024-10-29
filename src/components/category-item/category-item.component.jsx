@@ -6,6 +6,7 @@ const CategoryItem = ({ category: { id, title, imageUrl, route } }) => {
   const navigate = useNavigate();
 
   const onNavigateHandler = () => navigate(route);
+  console.log(route);
 
   return (
     <div
