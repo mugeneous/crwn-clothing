@@ -1,7 +1,5 @@
-// import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 
-// import { CartContext } from "../../components/contexts/cart.context";
 import { signOutUser } from "../../utils/firebase.utils";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -16,7 +14,6 @@ import { selectIsCartOpen } from "../../store/cart/cart.selector";
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
-  // const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
