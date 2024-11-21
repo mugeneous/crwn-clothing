@@ -1,4 +1,5 @@
 import { compose, createStore, applyMiddleware } from "redux";
+import { thunk } from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -11,10 +12,11 @@ const persistConfig = {
   blacklist: "user",
 };
 
-// eslint-disable-next-line no-undef
-const middleware = [process.env.NODE_ENV !== "production" && logger].filter(
-  Boolean
-);
+const middleware = [
+  // eslint-disable-next-line no-undef
+  process.env.NODE_ENV !== "production" && logger,
+  thunk,
+].filter(Boolean);
 
 const composeEnhancer =
   // eslint-disable-next-line no-undef
