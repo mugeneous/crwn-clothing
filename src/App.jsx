@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import {
-  onAuthStateChangedListener,
-  createUserDocFromAuth,
+  // onAuthStateChangedListener,
+  // createUserDocFromAuth,
+  getCurrentUser,
 } from "./utils/firebase.utils";
 
 import { setCurrentUser } from "./store/user/user.action";
@@ -18,18 +19,11 @@ import CategoriesPreview from "./routes/categories-preview/categories-preview.co
 import Category from "./routes/category/category.component";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocFromAuth(user.uid);
-      }
-      dispatch(setCurrentUser(user));
-    });
-
-    return unsubscribe;
-  }, [dispatch]);
+    getCurrentUser().then((user) => console.log(user));
+  }, []);
 
   const router = createBrowserRouter([
     {
