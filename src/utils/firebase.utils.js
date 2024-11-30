@@ -75,7 +75,7 @@ export const createUserDocFromAuth = async (
     }
   }
 
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -99,6 +99,10 @@ export const onAuthStateChangedListener = (callback) => {
   onAuthStateChanged(auth, callback);
 };
 
+// so function getCurrentUser ini digunakan untuk mengecek apakah user terauthentikasi atau tidak.
+// jadi ketika getCurrentUser dipanggil, dia akan mengembalikan sebuah promise. Di dalam promise, terdapat onAuthStateChanged listener.
+// jika user authenticated, listener akan mentrigger resolve the promise dengan user data dan unsubscribe
+// jika terdapat error, error itu akan dimasukan ke dalam reject function
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
