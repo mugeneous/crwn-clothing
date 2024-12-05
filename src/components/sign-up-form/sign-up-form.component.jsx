@@ -1,9 +1,7 @@
-import { useState, useContext } from "react";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocFromAuth,
-} from "../../utils/firebase.utils";
-import { UserContext } from "../contexts/user.context";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { SignUpStart } from "../../store/user/user.action";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -19,6 +17,8 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+
   // `formField` adalah state yang menyimpan nilai dari field form. dan `setFormField` adalah function yang memperbarui state ini
   const [formField, setFormField] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formField;
@@ -42,13 +42,7 @@ const SignUpForm = () => {
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      const response = await createUserDocFromAuth(user.uid, { displayName });
-
+      dispatch(SignUpStart(email, password, displayName));
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
