@@ -32,20 +32,19 @@ const firebaseConfig = {
 // initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+const db = getFirestore();
 // provider for generating an oAuthCredential
 const provider = new GoogleAuthProvider();
+
+// return auth instance
+export const auth = getAuth();
 
 // when user interact with provider, we want force them to select an account
 provider.setCustomParameters({
   prompt: "select_account",
 });
 
-// return auth instance
-export const auth = getAuth();
-
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
-const db = getFirestore();
 
 // this function create a user document in a firestore database if it doesnt exist
 export const createUserDocFromAuth = async (
@@ -60,12 +59,12 @@ export const createUserDocFromAuth = async (
 
   // if data doesnt exist, then create a new one
   if (!userSnapshot.exists()) {
-    const { displayName, email } = auth.currentUser;
+    const { email } = auth.currentUser;
     const createdAt = new Date();
 
+    console.log(additionalInformation);
     try {
       await setDoc(userDocRef, {
-        displayName,
         email,
         createdAt,
         ...additionalInformation,

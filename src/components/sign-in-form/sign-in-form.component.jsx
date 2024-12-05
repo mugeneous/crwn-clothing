@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../store/user/user.action";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
 import "./sign-in-form.styles.scss";
-import { useDispatch } from "react-redux";
-import {
-  emailSignInStart,
-  googleSignInStart,
-} from "../../store/user/user.action";
 
 const defaultFormFields = {
   email: "",
