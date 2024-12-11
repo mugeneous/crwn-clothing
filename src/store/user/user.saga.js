@@ -6,18 +6,20 @@ import {
   getCurrentUser,
   signInUserWithEmailAndPassword,
   signInWithGooglePopup,
+  signOutUser,
 } from "../../utils/firebase.utils";
 import { USER_ACTION_TYPES } from "./user.types";
 import {
   signInFailed,
   signInSuccess,
+  signOutFailed,
+  signOutSuccess,
   signUpFailed,
   signUpSuccess,
 } from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
   try {
-    console.log(additionalDetails);
     const userSnapshot = yield call(
       createUserDocFromAuth,
       userAuth.uid,
@@ -70,8 +72,16 @@ export function* signInEmail({ payload: { email, password } }) {
     );
     yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
-    console.log(error);
     yield put(signInFailed(error));
+  }
+}
+
+export function* signOut() {
+  try {
+    yield call(signOutUser);
+    yield put(signOutSuccess());
+  } catch (error) {
+    yield put(signOutFailed(error));
   }
 }
 
@@ -99,6 +109,10 @@ export function* onEmailSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInEmail);
 }
 
+export function* onSignOutStart() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
+}
+
 export function* userSaga() {
   yield all([
     call(onCheckUserSession),
@@ -106,5 +120,6 @@ export function* userSaga() {
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onSignUpSuccess),
+    call(onSignOutStart),
   ]);
 }
