@@ -22,7 +22,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
   try {
     const userSnapshot = yield call(
       createUserDocFromAuth,
-      userAuth.uid,
+      userAuth,
       additionalDetails
     );
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
