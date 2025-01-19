@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { CATEGORIES_ACTION_TYPES, Category } from "./categories.types";
+import { Category } from "./categories.types";
 
 import {
   fetchCategoriesStart,
@@ -23,7 +23,6 @@ export const categoriesReducer = (
   state = INITIAL_STATE,
   action = {} as AnyAction
 ): CategoriesState => {
-  console.log("action: ", action);
   if (fetchCategoriesStart.match(action)) {
     return {
       ...state,
