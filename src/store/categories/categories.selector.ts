@@ -1,9 +1,9 @@
 import { CategoryMap } from "./categories.types";
-
 import { createSelector } from "reselect";
+import { RootState } from "../store";
 
 // this basic selector retreive categories state from react redux
-const selectCategoriesReducer = (state) => state.categories;
+const selectCategoriesReducer = (state: RootState) => state.categories;
 
 // this memoize selector extract and return categories array from categories slice
 const selectCategories = createSelector(
